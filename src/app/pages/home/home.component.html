@@ -1,0 +1,144 @@
+<div class="home-page">
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="hero-title">Build Your Dream PC</h1>
+        <p class="hero-subtitle">High-performance computer parts for gamers, professionals, and enthusiasts</p>
+        <div class="hero-cta">
+          <a routerLink="/store" class="primary-button">Shop Now</a>
+          <a routerLink="/custom-build" class="secondary-button">Custom Build</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Products Section -->
+  <section class="featured-products">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Featured Products</h2>
+        <p class="section-subtitle">Our best-selling and highest-rated computer parts</p>
+      </div>
+      
+      <div class="products-grid">
+        @for (product of featuredProducts; track product.id) {
+          <div class="product-grid-item">
+            <app-product-card 
+              [product]="product" 
+              (productClicked)="handleProductClick($event)">
+            </app-product-card>
+          </div>
+        }
+      </div>
+      
+      <div class="section-cta">
+        <a routerLink="/store" class="primary-button">View All Products</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories Section -->
+  <section class="categories-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Browse Categories</h2>
+        <p class="section-subtitle">Find exactly what you need for your next build</p>
+      </div>
+      
+      <div class="categories-grid">
+        @for (category of categories; track category.name) {
+          <div class="category-card">
+            <div class="category-image">
+              <img [src]="category.image" [alt]="category.name">
+            </div>
+            <div class="category-content">
+              <h3 class="category-title">{{ category.name }}</h3>
+              <p class="category-description">{{ category.description }}</p>
+              <a [routerLink]="['/store']" [queryParams]="{category: category.name}" class="category-link">
+                Browse {{ category.name }}
+              </a>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Us Section -->
+  <section class="why-choose-us">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Why Choose ThunderPC</h2>
+        <p class="section-subtitle">We're committed to providing the best experience for PC builders</p>
+      </div>
+      
+      <div class="features-grid">
+        <div class="feature-item">
+          <div class="feature-icon">🚚</div>
+          <h3 class="feature-title">Fast Shipping</h3>
+          <p class="feature-description">Free shipping on orders over $100 and expedited options available.</p>
+        </div>
+        
+        <div class="feature-item">
+          <div class="feature-icon">💯</div>
+          <h3 class="feature-title">Quality Guaranteed</h3>
+          <p class="feature-description">All products are authentic and come with manufacturer warranty.</p>
+        </div>
+        
+        <div class="feature-item">
+          <div class="feature-icon">🔧</div>
+          <h3 class="feature-title">Expert Support</h3>
+          <p class="feature-description">Our tech-savvy team is available 7 days a week to help with your questions.</p>
+        </div>
+        
+        <div class="feature-item">
+          <div class="feature-icon">🔄</div>
+          <h3 class="feature-title">Easy Returns</h3>
+          <p class="feature-description">30-day hassle-free return policy on most items.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">What Our Customers Say</h2>
+        <p class="section-subtitle">Don't just take our word for it</p>
+      </div>
+      
+      <div class="testimonials-grid">
+        @for (testimonial of testimonials; track testimonial.name) {
+          <div class="testimonial-card">
+            <div class="testimonial-rating">
+              @for (star of [1, 2, 3, 4, 5]; track star) {
+                <span class="star" [class.filled]="star <= testimonial.rating">★</span>
+              }
+            </div>
+            <p class="testimonial-quote">"{{ testimonial.quote }}"</p>
+            <div class="testimonial-author">
+              <img [src]="testimonial.image" [alt]="testimonial.name" class="author-image">
+              <span class="author-name">{{ testimonial.name }}</span>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter Section -->
+  <section class="newsletter-section">
+    <div class="container">
+      <div class="newsletter-content">
+        <h2 class="newsletter-title">Stay Updated</h2>
+        <p class="newsletter-description">Subscribe to our newsletter for the latest product arrivals, special offers and other discount information.</p>
+        <form class="newsletter-form">
+          <input type="email" placeholder="Your email address" class="newsletter-input">
+          <button type="submit" class="newsletter-button">Subscribe</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</div>

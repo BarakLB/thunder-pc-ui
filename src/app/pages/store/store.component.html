@@ -1,0 +1,91 @@
+<div class="store-page">
+  <div class="store-header">
+    <div class="container">
+      <h1 class="store-title">Computer Parts Store</h1>
+      <p class="store-description">Browse our extensive collection of high-quality computer components</p>
+    </div>
+  </div>
+  
+  <div class="container">
+    <div class="store-layout">
+      <!-- Sidebar/Filters -->
+      <div class="store-sidebar">
+        <div class="sidebar-section">
+          <h3 class="sidebar-title">Categories</h3>
+          <ul class="category-list">
+            @for (category of categories; track category) {
+              <li class="category-item">
+                <button 
+                  [class.active]="selectedCategory() === category || (category === 'All Products' && !selectedCategory())"
+                  (click)="selectCategory(category)"
+                  class="category-button">
+                  {{ category }}
+                </button>
+              </li>
+            }
+          </ul>
+        </div>
+        
+        <div class="sidebar-section">
+          <h3 class="sidebar-title">Filter By</h3>
+          <div class="filter-group">
+            <label class="filter-label">
+              <input type="checkbox" class="filter-checkbox">
+              <span>In Stock Only</span>
+            </label>
+          </div>
+          
+          <div class="filter-group">
+            <h4 class="filter-subtitle">Price Range</h4>
+            <div class="price-range">
+              <input type="range" min="0" max="2000" step="50" class="range-slider">
+              <div class="range-labels">
+                <span>$0</span>
+                <span>$2000</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Products Grid -->
+      <div class="store-main">
+        <div class="products-toolbar">
+          <div class="products-count">
+            Showing <span>{{ filteredProducts().length }}</span> products
+          </div>
+          
+          <div class="products-sort">
+            <label for="sort-select">Sort by: </label>
+            <select 
+              id="sort-select" 
+              class="sort-select"
+              [value]="selectedSort()"
+              (change)="onSortChange($event)">
+              @for (option of sortOptions; track option.value) {
+                <option [value]="option.value">{{ option.label }}</option>
+              }
+            </select>
+          </div>
+        </div>
+        
+        <div class="products-grid">
+          @if (filteredProducts().length === 0) {
+            <div class="no-products">
+              <p>No products found matching your criteria</p>
+            </div>
+          } @else {
+            @for (product of filteredProducts(); track product.id) {
+              <div class="product-grid-item">
+                <app-product-card 
+                  [product]="product"
+                  (productClicked)="handleProductClick($event)">
+                </app-product-card>
+              </div>
+            }
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

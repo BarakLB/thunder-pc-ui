@@ -1,0 +1,33 @@
+<header class="site-header">
+  <div class="container">
+    <div class="logo-container">
+      <a routerLink="/" class="logo">ThunderPC</a>
+      <span class="tagline">High Performance Computer Parts</span>
+    </div>
+    
+    <nav class="main-nav">
+      <ul class="nav-list">
+        @for (item of navItems; track item.path) {
+          <li class="nav-item">
+            <a 
+              [routerLink]="item.path" 
+              [routerLinkActiveOptions]="{exact: item.exact}"
+              routerLinkActive="active">
+              {{ item.label }}
+            </a>
+          </li>
+        }
+      </ul>
+    </nav>
+    
+    <div class="header-actions">
+      <button class="search-button">
+        <span class="icon">🔍</span>
+      </button>
+      <button class="cart-button">
+        <span class="icon">🛒</span>
+        <span class="cart-count">0</span>
+      </button>
+    </div>
+  </div>
+</header>
